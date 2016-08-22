@@ -5,15 +5,15 @@ machine:
 dependencies:
   override:
     - docker login -u $DOCKER_USER -p $DOCKER_PASS -e "$DOCKER_EMAIL" quay.io
-    - docker build -t quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:${CIRCLE_SHA1:0:7} .
+    - docker build -t quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH .
 
 test:
   override:
-    - docker run -d -p 8080:80 quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:${CIRCLE_SHA1:0:7}; sleep 10
+    - docker run -d -p 8080:80 quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH; sleep 10
     - curl --retry 10 --retry-delay 5 -v http://localhost:8080/
 
 deployment:
   quayio:
     branch: dev
     commands:
-      - docker push quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:${CIRCLE_SHA1:0:7}
+      - docker push quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
