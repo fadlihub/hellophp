@@ -1,6 +1,6 @@
 <?php
 
-echo "XYZ halo-halo dunia!<br>";
+echo "ABCDEF halo-halo dunia!<br>";
 echo "ini baru kalimat kedua<br>";
 echo "ini kalimat yang ketiga<br>";
 echo "tambah bagian dev<br>";
