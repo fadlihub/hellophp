@@ -19,4 +19,4 @@ deployment:
     branch: dev
     commands:
       - docker push quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
-      - ssh rowobot@103.195.31.165 'bash -s' < testdeploy.sh
+      - ./deploy.sh
