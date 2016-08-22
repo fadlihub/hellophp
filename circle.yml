@@ -1,4 +1,6 @@
 machine:
+  timezone:
+    Asia/Jakarta
   services:
     - docker
 
@@ -13,7 +15,11 @@ test:
     - curl --retry 10 --retry-delay 5 -v http://localhost:8080/
 
 deployment:
-  quayio:
+  quaystaging:
     branch: dev
     commands:
       - docker push quay.io/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+  serverstaging:
+   branch: dev
+   commands:
+      - ssh rowobot@103.195.31.165 'bash -s' < testdeploy.sh
